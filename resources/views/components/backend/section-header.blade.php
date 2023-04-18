@@ -3,7 +3,7 @@
 <div class="d-flex justify-content-between">
     <div>
         <h4 class="card-title mb-0">
-            {{ $slot }}
+            Welcome to School Admin Dashboard
         </h4>
         @if($subtitle != "")
         <div class="small text-medium-emphasis">

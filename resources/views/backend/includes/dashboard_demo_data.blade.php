@@ -1,5 +1,5 @@
 <div class="row">
-    <div class="col-sm-6 col-lg-3">
+    {{-- <div class="col-sm-6 col-lg-3">
         <div class="card mb-4">
             <div class="card-body">
                 <div class="fs-4 fw-semibold">89.9%</div>
@@ -21,9 +21,9 @@
                 </div><small class="text-medium-emphasis">Widget helper text</small>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- /.col-->
-    <div class="col-sm-6 col-lg-3">
+    {{-- <div class="col-sm-6 col-lg-3">
         <div class="card mb-4">
             <div class="card-body">
                 <div class="fs-4 fw-semibold">$98.111,00</div>
@@ -45,7 +45,7 @@
                 </div><small class="text-medium-emphasis">Widget helper text</small>
             </div>
         </div>
-    </div>
+    </div> --}}
     <!-- /.col-->
 </div>
 <!-- /.row-->
@@ -53,7 +53,7 @@
 
 
 <div class="row">
-    <div class="col-sm-6 col-lg-3">
+    {{-- <div class="col-sm-6 col-lg-3">
         <div class="card mb-4 text-white bg-primary">
             <div class="card-body">
                 <div class="fs-4 fw-semibold">89.9%</div>
@@ -89,8 +89,8 @@
         </div>
     </div>
     <!-- /.col-->
-    <div class="col-sm-6 col-lg-3">
-        <div class="card mb-4 text-white bg-info">
+    <div class="col-sm-6 col-lg-3"> --}}
+        {{-- <div class="card mb-4 text-white bg-info">
             <div class="card-body">
                 <div class="fs-4 fw-semibold">2 TB</div>
                 <div>Widget title</div>
@@ -98,7 +98,7 @@
                     <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                 </div><small class="text-medium-emphasis-inverse">Widget helper text</small>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- /.col-->
 </div>
@@ -106,7 +106,7 @@
 
 
 <div class="row">
-    <div class="col-6 col-lg-3">
+    {{-- <div class="col-6 col-lg-3">
         <div class="card mb-4">
             <div class="card-body p-3 d-flex align-items-center">
                 <div class="bg-primary text-white p-3 me-3">
@@ -163,8 +163,8 @@
         </div>
     </div>
     <!-- /.col-->
-    <div class="col-6 col-lg-3">
-        <div class="card mb-4">
+    <div class="col-6 col-lg-3"> --}}
+        {{-- <div class="card mb-4">
             <div class="card-body p-3 d-flex align-items-center">
                 <div class="bg-danger text-white p-3 me-3">
                     <i class="fa-regular fa-bell"></i>
@@ -179,7 +179,7 @@
                     <i class="fa-solid fa-circle-chevron-right"></i>
                 </a>
             </div>
-        </div>
+        </div> --}}
     </div>
     <!-- /.col-->
 </div>

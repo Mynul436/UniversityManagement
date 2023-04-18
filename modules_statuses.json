@@ -1,5 +1,12 @@
 {
     "Article": true,
     "Tag": true,
-    "Comment": true
+    "Comment": true,
+    "Class": true,
+    "Abc": true,
+    "StandardOrClass": true,
+    "Section": true,
+    "ClassSection": true,
+    "Subject": true,
+    "Student": true
 }

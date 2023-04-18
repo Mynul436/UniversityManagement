@@ -1,0 +1,13 @@
+{
+    "name": "StandardOrClass",
+    "alias": "standardorclass",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\StandardOrClass\\Providers\\StandardOrClassServiceProvider"
+    ],
+    "aliases": {},
+    "files": [],
+    "requires": []
+}
