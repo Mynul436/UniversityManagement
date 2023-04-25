@@ -13,12 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('subjects', function (Blueprint $table) {
+        Schema::create('notices', function (Blueprint $table) {
             $table->id();
 
             $table->string('name');
-            $table->string('code');
-            $table->string('class_name');
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
@@ -39,6 +37,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('subjects');
+        Schema::dropIfExists('notices');
     }
 };

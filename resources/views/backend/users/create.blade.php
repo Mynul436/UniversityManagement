@@ -68,6 +68,11 @@
                     </div>
                 </div>
 
+
+
+
+
+
                 <div class="form-group row  mb-3">
                     {{ html()->label(__('labels.backend.users.fields.password'))->class('col-sm-2 form-control-label')->for('password') }}
 
@@ -89,6 +94,182 @@
                                 ->required() }}
                     </div>
                 </div>
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'group_name';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'shift_name';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                    
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'class_name';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        $classes=DB::table('standardorclasses')->get();
+                        ?>
+                                      {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                                      {{-- {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }} --}}
+                                      <select name="{{$field_name}}" id="{{$field_name}}" class="form-control" required="required">
+                                          @foreach ($classes as $class)
+                                              <option value="{{$class->id}}">{{$class->name}}</option>
+                                          @endforeach
+                                      </select>
+                    </div>
+                </div>
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'section_name';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        $sections=DB::table('sections')->get();
+                        ?>
+               {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+               {{-- {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }} --}}
+               <select name="{{$field_name}}" id="{{$field_name}}" class="form-control" required="required">
+                   @foreach ($sections as $section)
+                       <option value="{{$section->id}}">{{$section->name}}</option>
+                   @endforeach
+               </select>
+                    </div>
+                </div>
+
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'year';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+                
+
+
+
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'reg_no';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'father_name';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'mother_name';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'guardian_name';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+                
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'guardian_relation';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'guardian_phone';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+                <div class="form-group row  mb-3">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'guardian_email';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
+                </div>
+
+
 
                 <div class="form-group row  mb-3">
                     {{ html()->label(__('labels.backend.users.fields.status'))->class('col-6 col-sm-2 form-control-label')->for('status') }}

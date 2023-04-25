@@ -21,6 +21,23 @@ return new class extends Migration
             $table->string('mobile')->nullable();
             $table->string('gender')->nullable();
             $table->date('date_of_birth')->nullable();
+
+            // $table->integer('student_id')->comment('user_id=student_id');
+            $table->string('group_name')->nullable();
+            $table->string('shift_name')->nullable();
+            $table->string('class_name')->nullable();
+            $table->string('section_name')->nullable();
+            $table->integer('year')->nullable();
+
+    $table->string('reg_no')->nullable();
+
+            $table->string('father_name')->nullable();
+            $table->string('mother_name')->nullable();
+            $table->string('guardian_name')->nullable();
+            $table->string('guardian_relation')->nullable();
+            $table->string('guardian_phone')->nullable();
+            $table->string('guardian_email')->nullable();
+
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('avatar')->nullable()->default('img/default-avatar.jpg');

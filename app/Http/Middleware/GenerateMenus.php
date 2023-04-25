@@ -356,6 +356,37 @@ $classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Add Sec
 
                     // {{route('backend.users.profile', Auth::user()->id)}}
 
+
+                    $accessControl = $menu->add('<i class="nav-icon fa-solid fa-user-gear"></i> Add Student/Teacher', [
+                        'class' => 'nav-group',
+                    ])
+                        ->data([
+                            'order' => 104,
+                            'activematches' => [
+                                'admin/users*',
+                                'admin/roles*',
+                            ],
+                            'permission' => ['view_users', 'view_roles'],
+                        ]);
+                    $accessControl->link->attr([
+                        'class' => 'nav-link nav-group-toggle',
+                        'href' => '#',
+                    ]);
+
+                    // Submenu: Users
+                    $accessControl->add('<i class="nav-icon fa-solid fa-user-group"></i> Users', [
+                        'route' => 'backend.users.index',
+                        'class' => 'nav-item',
+                    ])
+                        ->data([
+                            'order' => 105,
+                            'activematches' => 'admin/users*',
+                            'permission' => ['view_users'],
+                        ])
+                        ->link->attr([
+                            'class' => 'nav-link',
+                        ]);
+
                 } else if (auth()->user()->hasRole('Student')) {
                     //Customer Tab
                 //     $CustomerTab = $menu->add('<i class="nav-icon fas fa-file-alt"></i> ' . __('Customer'), [

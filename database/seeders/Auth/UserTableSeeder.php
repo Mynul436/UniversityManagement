@@ -60,7 +60,7 @@ class UserTableSeeder extends Seeder
             [
                 'first_name' => 'Student',
                 'last_name' => 'User User',
-                'name' => 'Manager',
+                'name' => 'Student User',
                 'email' => 'student@student.com',
                 'password' => Hash::make('secret'),
                 'username' => '100003',

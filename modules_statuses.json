@@ -8,5 +8,7 @@
     "Section": true,
     "ClassSection": true,
     "Subject": true,
-    "Student": true
+    "Student": true,
+    "Notice": true,
+    "Result": true
 }

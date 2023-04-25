@@ -15,8 +15,28 @@ return new class extends Migration
     {
         Schema::create('students', function (Blueprint $table) {
             $table->id();
+$table->string('name');
+// $table->integer('student_id')->comment('user_id=student_id');
+// $table->string('group_id')->nullable();
+// $table->string('shift_id')->nullable();
+// $table->integer('class_id');
+// $table->integer('section_id');
+// $table->integer('year');
+            // $table->string('reg_no');
+            // $table->unsignedBigInteger('class_id');
+            // $table->unsignedBigInteger('section_id');
+            // $table->string('father_name');
+            // $table->string('mother_name');
+            // $table->string('guardian_name');
+            // $table->string('guardian_relation');
+            // $table->string('guardian_phone');
+            // $table->string('guardian_email');
+            
+            // $table->foreign('class_id')->references('id')->on('classes');
+            // $table->foreign('section_id')->references('id')->on('sections');
+            // $table->string('address')->nullable();
 
-            $table->string('name');
+        
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
