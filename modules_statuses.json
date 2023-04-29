@@ -10,5 +10,6 @@
     "Subject": true,
     "Student": true,
     "Notice": true,
-    "Result": true
+    "Result": true,
+    "Attendence": true
 }

@@ -37,7 +37,7 @@ return new class extends Migration
             $table->string('guardian_relation')->nullable();
             $table->string('guardian_phone')->nullable();
             $table->string('guardian_email')->nullable();
-
+            
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password')->nullable();
             $table->string('avatar')->nullable()->default('img/default-avatar.jpg');

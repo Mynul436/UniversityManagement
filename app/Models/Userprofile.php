@@ -17,4 +17,5 @@ class Userprofile extends BaseModel
     {
         return $this->belongsTo('App\Models\User');
     }
+    
 }

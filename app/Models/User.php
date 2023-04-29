@@ -115,4 +115,8 @@ class User extends Authenticatable implements HasMedia, MustVerifyEmail
     {
         return env('SLACK_NOTIFICATION_WEBHOOK');
     }
+    public function attendences()
+    {
+        return $this->hasMany('Modules\Attendence\Models\Attendence');
+    }
 }
