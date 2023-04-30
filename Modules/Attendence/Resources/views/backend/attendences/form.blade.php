@@ -90,8 +90,19 @@
 <div class="card-body">
     <table id="example" class="table table-bordered table-striped">
 @php
-$students=DB::table('users')->where('role',3)->get();    
-dd($students);  
+// $students=DB::table('users')->whereHas('roles', function($q){
+//     $q->where('name', 'student');
+// })->get();   
+// dd($students);  
+ use App\Models\User;
+    // use App\Models\Role;
+    use Spatie\Permission\Models\Role;
+// dd(User::whereHas("roles", function($q){ $q->where("name", "roo"); })->get());
+// $student=User::whereHas("roles", function($q){ $q->where("name", "stuendt"); })->get();
+$student = Role::findByName('student');
+ $student1 = $student->users;
+// $student = Role::where('name', 'student')->first()->getUsersWithRole();
+dd($student1);
 @endphp
 
         <thead>

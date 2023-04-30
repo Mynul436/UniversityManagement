@@ -19,6 +19,7 @@ return new class extends Migration
             $table->unsignedBigInteger('class_id')->nullable();
             $table->unsignedBigInteger('section_id')->nullable();
             $table->unsignedBigInteger('subject_id')->nullable();
+            $table->date('attendence_date')->nullable();
             // $table->unsignedBigInteger('teacher_id')->nullable();
             $table->enum('attendence_type', ['present', 'absent', 'leave'])->nullable();
 
