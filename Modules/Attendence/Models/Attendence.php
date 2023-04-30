@@ -10,6 +10,7 @@ class Attendence extends BaseModel
 {
     use HasFactory;
     use SoftDeletes;
+    
 
     protected $table = 'attendences';
 

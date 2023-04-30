@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('attendences', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->nullable();
-            $table->unsignedBigInteger('class_id')->nullable();
-            $table->unsignedBigInteger('section_id')->nullable();
-            $table->unsignedBigInteger('subject_id')->nullable();
+            $table->string('user_id')->nullable();
+            $table->string('class_name')->nullable();
+            $table->string('section_name')->nullable();
+            $table->string('subject_name')->nullable();
             $table->date('attendence_date')->nullable();
             // $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->enum('attendence_type', ['present', 'absent', 'leave'])->nullable();
+            $table->string('attendence_status')->nullable();
+            $table->string('comment')->nullable();
 
-            $table->string('name');
+            $table->string('name')->default('all ok');
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);
