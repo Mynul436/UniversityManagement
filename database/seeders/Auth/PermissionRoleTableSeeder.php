@@ -58,7 +58,21 @@ class PermissionRoleTableSeeder extends Seeder
         // Artisan::call('auth:permission', [
         //     'name' => 'comments',
         // ]);
-        // echo "\n _Comments_ Permissions Created.";
+      //  echo "\n _Results_ Permissions Created.";
+        Artisan::call('auth:permission', [
+            'name' => 'results',
+        ]);
+        echo "\n _Results_ Permissions Created.";
+
+        Artisan::call('auth:permission', [
+            'name' => 'notices',
+        ]);
+        echo "\n _Notices_ Permissions Created.";
+
+        Artisan::call('auth:permission', [
+            'name' => 'subjects',
+        ]);
+        echo "\n _Subjects_ Permissions Created.";
 
         echo "\n\n";
 

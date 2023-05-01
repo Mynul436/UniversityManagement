@@ -64,7 +64,7 @@
         </select>
     </div>
 
-    
+
 </div>
 
 <div class="col-12 col-sm-4">
@@ -123,14 +123,38 @@
                         <option value="leave">Leave</option>
                     </select>
                 </td> --}}
+
                 <td>
-                    <input type="text" name="attendance_status"[{{ $student->id }}]">
-@php
-    dd($student->id)
-@endphp
+                    @php
+                    // dd($student->id)
+                    @endphp
+                    <div class="form-group">
+                        <?php
+    $field_name = 'status';
+    $field_lable = label_case($field_name);
+    $field_placeholder = "-- Select an option --";
+    $required = "required";
+    $select_options = [
+        '1'=>'Absent',
+        '0'=>'Present',
+        '2'=>'Leave'
+    ];
+    ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
+                    </div>
                 </td>
                 <td>
-                    <input type="text" name="attendance_comment[{{ $student->id }}]">
+                    <div class="form-group">
+                        <?php
+                        $field_name = 'comment';
+                        $field_lable = label_case($field_name);
+                        $field_placeholder = $field_lable;
+                        $required = "";
+                        ?>
+                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+                        {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+                    </div>
                 </td>
             </tr>
             @endforeach
@@ -139,40 +163,40 @@
     @endforeach
 </div>
 
-{{-- 
+{{--
     @php
         $selectedClass = request()->input('class_name');
         $students = $studentsByClass[$selectedClass] ?? collect();
     @endphp
     <h3>{{ $selectedClass }}</h3>
-    <table id="example" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>SL</th>
-                <th>Name</th>
-                <th>Attend Status</th>
-                <th>Comment</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($students as $student)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td>
-                        <select name="attendance_status[{{ $student->id }}]">
-                            <option value="present">Present</option>
-                            <option value="absent">Absent</option>
-                            <option value="leave">Leave</option>
-                        </select>
-                    </td>
-                    <td>
-                        <input type="text" name="attendance_comment[{{ $student->id }}]">
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table> --}}
+<table id="example" class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>SL</th>
+            <th>Name</th>
+            <th>Attend Status</th>
+            <th>Comment</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach($students as $student)
+        <tr>
+            <td>{{ $loop->iteration }}</td>
+            <td>{{ $student->name }}</td>
+            <td>
+                <select name="attendance_status[{{ $student->id }}]">
+                    <option value="present">Present</option>
+                    <option value="absent">Absent</option>
+                    <option value="leave">Leave</option>
+                </select>
+            </td>
+            <td>
+                <input type="text" name="attendance_comment[{{ $student->id }}]">
+            </td>
+        </tr>
+        @endforeach
+    </tbody>
+</table> --}}
 
 
 

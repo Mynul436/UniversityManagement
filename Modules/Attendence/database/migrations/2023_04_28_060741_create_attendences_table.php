@@ -19,15 +19,15 @@ return new class extends Migration
             $table->string('class_name')->nullable();
             $table->string('section_name')->nullable();
             $table->string('subject_name')->nullable();
-            $table->date('attendence_date')->nullable();
+            $table->date('attendence_date');
             // $table->unsignedBigInteger('teacher_id')->nullable();
-            $table->string('attendence_status')->nullable();
+            // $table->string('attendence_status')->nullable();
             $table->string('comment')->nullable();
 
             $table->string('name')->default('all ok');
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
-            $table->tinyInteger('status')->default(1);
+            $table->tinyInteger('status');
 
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
