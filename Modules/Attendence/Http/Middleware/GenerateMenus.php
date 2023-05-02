@@ -24,18 +24,18 @@ class GenerateMenus
         \Menu::make('admin_sidebar', function ($menu) {
 
             // Attendences
-            $menu->add('<i class="nav-icon fa-regular fa-sun"></i> '.__('Attendences'), [
-                'route' => 'backend.attendences.index',
-                'class' => 'nav-item',
-            ])
-            ->data([
-                'order'         => 77,
-                'activematches' => ['admin/attendences*'],
-                'permission'    => ['view_attendences'],
-            ])
-            ->link->attr([
-                'class' => 'nav-link',
-            ]);
+            // $menu->add('<i class="nav-icon fa-regular fa-sun"></i> '.__('Attendences'), [
+            //     'route' => 'backend.attendences.index',
+            //     'class' => 'nav-item',
+            // ])
+            // ->data([
+            //     'order'         => 77,
+            //     'activematches' => ['admin/attendences*'],
+            //     'permission'    => ['view_attendences'],
+            // ])
+            // ->link->attr([
+            //     'class' => 'nav-link',
+            // ]);
         })->sortBy('order');
 
         return $next($request);
