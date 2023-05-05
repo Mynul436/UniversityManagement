@@ -17,6 +17,12 @@ return new class extends Migration
             $table->id();
 
             $table->string('name');
+            $table->string('reg_no')->nullable();
+            $table->string('year_id')->nullable();
+            $table->string('class_id')->nullable();
+            $table->string('section_id')->nullable();
+            $table->string('subject_id')->nullable();
+            $table->double('total_marks')->nullable();
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
             $table->tinyInteger('status')->default(1);

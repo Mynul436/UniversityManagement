@@ -68,51 +68,51 @@ class GenerateMenus
                                 'admin/new-user*',
                             ],
                             'permission' => ['view_posts', 'view_categories'],
+                                            ]);
+                    $classAndStandrard->link->attr([
+                        'class' => 'nav-link nav-group-toggle',
+                        'href' => '#',
+                    ]);
+                    //add class or standard
+                    $classAndStandrard->add('<i class="nav-icon fas fa-file-alt"></i> ' . __('Add Class or Standard'), [
+                        'route' => 'backend.standardorclasses.index',
+                        'class' => 'nav-item',
+                    ])
+                        ->data([
+                            'order' => 82,
+                            'activematches' => 'admin/class*',
+                            'permission' => ['edit_posts'],
+                        ])
+                        ->link->attr([
+                            'class' => 'nav-link',
                         ]);
-$classAndStandrard->link->attr([
-    'class' => 'nav-link nav-group-toggle',
-    'href' => '#',
-]);
-//add class or standard
-$classAndStandrard->add('<i class="nav-icon fas fa-file-alt"></i> ' . __('Add Class or Standard'), [
-    'route' => 'backend.standardorclasses.index',
-    'class' => 'nav-item',
-])
-    ->data([
-        'order' => 82,
-        'activematches' => 'admin/class*',
-        'permission' => ['edit_posts'],
-    ])
-    ->link->attr([
-        'class' => 'nav-link',
-    ]);
-//add section
-$classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Add Section'), [
-           'route' => 'backend.sections.index',
-            'class' => 'nav-item',
-])
-    ->data([
-        'order' => 83,
-        'activematches' => 'admin/section*',
-        'permission' => ['edit_categories'],
-    ])
-    ->link->attr([
-        'class' => 'nav-link',
-    ]);
+                    //add section
+                    $classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Add Section'), [
+                            'route' => 'backend.sections.index',
+                                'class' => 'nav-item',
+                    ])
+                        ->data([
+                            'order' => 83,
+                            'activematches' => 'admin/section*',
+                            'permission' => ['edit_categories'],
+                        ])
+                        ->link->attr([
+                            'class' => 'nav-link',
+                        ]);
 
-    //classwise section
-    $classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Classwise Section'), [
-             'route' => 'backend.classsections.index',
-            'class' => 'nav-item',
-    ])
-        ->data([
-            'order' => 83,
-            'activematches' => 'admin/classwisesection*',
-            'permission' => ['edit_categories'],
-        ])
-        ->link->attr([
-            'class' => 'nav-link',
-        ]);
+                        //classwise section
+                        $classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Classwise Section'), [
+                                'route' => 'backend.classsections.index',
+                                'class' => 'nav-item',
+                        ])
+                            ->data([
+                                'order' => 83,
+                                'activematches' => 'admin/classwisesection*',
+                                'permission' => ['edit_categories'],
+                            ])
+                            ->link->attr([
+                                'class' => 'nav-link',
+                            ]);
 
                     $accessControl = $menu->add('<i class="nav-icon fa-solid fa-user-gear"></i> Add Student/Teacher', [
                         'class' => 'nav-group',
@@ -167,7 +167,18 @@ $classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Add Sec
                         ->link->attr([
                             'class' => 'nav-link',
                         ]);
-
+                        $menu->add('<i class="nav-icon fa-solid fa-user-shield"></i>' . __('Roles'), [
+                            'route' => 'backend.roles.index',
+                            'class' => 'nav-item',
+                        ])
+                            ->data([
+                                'order' => 8,
+                                'activematches' => 'admin/roles*',
+                                'permission' => ['view_roles'],
+                            ])
+                            ->link->attr([
+                                'class' => 'nav-link',
+                            ]);
 
 
                 } else if (auth()->user()->hasRole('student')) {

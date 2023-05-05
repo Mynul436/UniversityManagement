@@ -73,13 +73,30 @@ class PermissionRoleTableSeeder extends Seeder
             'name' => 'subjects',
         ]);
         echo "\n _Subjects_ Permissions Created.";
+        Artisan::call('auth:permission', [
+            'name' => 'standardorclasses',
+        ]);
+        echo "\n _StandardOrClasses_ Permissions Created.";
+        Artisan::call('auth:permission', [
+            'name' => 'sections',
+        ]);
+        echo "\n _Sections_ Permissions Created.";
+        Artisan::call('auth:permission', [
+            'name' => 'classsections',
+        ]);
+        echo "\n _ClassSections_ Permissions Created.";
+
+        Artisan::call('auth:permission', [
+            'name' => 'attendence',
+        ]);
+        echo "\n _Attendences_ Permissions Created.";
 
         echo "\n\n";
 
         // Assign Permissions to Roles
         $admin->givePermissionTo(Permission::all());
         $student->givePermissionTo(['view_notices', 'view_results', 'view_subjects', 'view_backend']);
-        $teacher->givePermissionTo(Permission::all());
+        $teacher->givePermissionTo('view_backend');
         // $executive->givePermissionTo('view_backend');
 
         Schema::enableForeignKeyConstraints();
