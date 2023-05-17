@@ -19,16 +19,16 @@ use Illuminate\Support\Facades\Route;
 *
 * --------------------------------------------------------------------
 */
-Route::group(['namespace' => '\Modules\ClassSection\Http\Controllers\Frontend', 'as' => 'frontend.', 'middleware' => 'web', 'prefix' => ''], function () {
+Route::group(['namespace' => '\Modules\Customer\Http\Controllers\Frontend', 'as' => 'frontend.', 'middleware' => 'web', 'prefix' => ''], function () {
 
     /*
      *
-     *  Frontend ClassSections Routes
+     *  Frontend Customers Routes
      *
      * ---------------------------------------------------------------------
      */
-    $module_name = 'classsections';
-    $controller_name = 'ClassSectionController';
+    $module_name = 'customers';
+    $controller_name = 'CustomersController';
     Route::get("$module_name", ['as' => "$module_name.index", 'uses' => "$controller_name@index"]);
     Route::get("$module_name/{id}/{slug?}", ['as' => "$module_name.show", 'uses' => "$controller_name@show"]);
 });
@@ -39,7 +39,7 @@ Route::group(['namespace' => '\Modules\ClassSection\Http\Controllers\Frontend', 
 *
 * --------------------------------------------------------------------
 */
-Route::group(['namespace' => '\Modules\ClassSection\Http\Controllers\Backend', 'as' => 'backend.', 'middleware' => ['web', 'auth', 'can:view_backend'], 'prefix' => 'admin'], function () {
+Route::group(['namespace' => '\Modules\Customer\Http\Controllers\Backend', 'as' => 'backend.', 'middleware' => ['web', 'auth', 'can:view_backend'], 'prefix' => 'admin'], function () {
     /*
     * These routes need view-backend permission
     * (good if you want to allow more than one group in the backend,
@@ -50,15 +50,29 @@ Route::group(['namespace' => '\Modules\ClassSection\Http\Controllers\Backend', '
 
     /*
      *
-     *  Backend ClassSections Routes
+     *  Backend Customers Routes
      *
      * ---------------------------------------------------------------------
      */
-    $module_name = 'classsections';
-    $controller_name = 'ClassSectionController';
+
+
+    // Route::get('/get-data/{id}', 'DataController@getData');
+    
+
+    $module_name = 'customers';
+    $controller_name = 'CustomersController';
+    Route::get("$module_name/referrer", ['as' => "$module_name.referrer", 'uses' => "$controller_name@referrer"]);
+    Route::get("$module_name/referrer_list", ['as' => "$module_name.referrer_list", 'uses' => "$controller_name@referrer_list"]);
+    
     Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
     Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
     Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);
     Route::patch("$module_name/trashed/{id}", ['as' => "$module_name.restore", 'uses' => "$controller_name@restore"]);
+
+    
+
     Route::resource("$module_name", "$controller_name");
+    Route::get("$module_name/test", ['as' => "$module_name.test", 'uses' => "$controller_name@test"]);
+
+    
 });

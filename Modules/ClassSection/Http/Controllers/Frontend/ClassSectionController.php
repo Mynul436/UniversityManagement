@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
 use Illuminate\Support\Str;
 
-class ClassSectionsController extends Controller
+class ClassSectionController extends Controller
 {
     public function __construct()
     {

@@ -101,18 +101,18 @@ class GenerateMenus
                         ]);
 
                         //classwise section
-                        $classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Classwise Section'), [
-                                'route' => 'backend.classsections.index',
-                                'class' => 'nav-item',
-                        ])
-                            ->data([
-                                'order' => 83,
-                                'activematches' => 'admin/classwisesection*',
-                                'permission' => ['edit_categories'],
-                            ])
-                            ->link->attr([
-                                'class' => 'nav-link',
-                            ]);
+                        // $classAndStandrard->add('<i class="nav-icon fas fa-sitemap"></i> ' . __('Classwise Section'), [
+                        //         'route' => 'backend.classsections.index',
+                        //         'class' => 'nav-item',
+                        // ])
+                        //     ->data([
+                        //         'order' => 83,
+                        //         'activematches' => 'admin/classwisesection*',
+                        //         'permission' => ['edit_categories'],
+                        //     ])
+                        //     ->link->attr([
+                        //         'class' => 'nav-link',
+                        //     ]);
 
                     $accessControl = $menu->add('<i class="nav-icon fa-solid fa-user-gear"></i> Add Student/Teacher', [
                         'class' => 'nav-group',
@@ -175,6 +175,18 @@ class GenerateMenus
                                 'order' => 8,
                                 'activematches' => 'admin/roles*',
                                 'permission' => ['view_roles'],
+                            ])
+                            ->link->attr([
+                                'class' => 'nav-link',
+                            ]);
+                            $menu->add('<i class="nav-icon fa-regular fa-sun"></i> '.__('Attendences'), [
+                                'route' => 'backend.attendences.index',
+                                'class' => 'nav-item',
+                            ])
+                            ->data([
+                                'order'         => 77,
+                                'activematches' => ['admin/attendences*'],
+                                'permission'    => ['view_attendences'],
                             ])
                             ->link->attr([
                                 'class' => 'nav-link',

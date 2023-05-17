@@ -1,28 +1,31 @@
 <?php
 
-namespace Modules\Attendence\Http\Controllers\Backend;
+namespace Modules\Customer\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Authorizable;
 use Flash;
+// use App\Http\Controllers\Backend\BackendBaseController;
 use Illuminate\Support\Facades\Crypt;
-use Modules\Attendence\Events\AttendenceCreated;
-use Modules\Attendence\Events\AttendenceUpdated;
-use Modules\Attendence\Http\Requests\Backend\AttendencesRequest;
-use Modules\Country\Http\Requests\Backend\CountriesRequest;
+use Modules\ClassSection\Events\ClassSectionCreated;
+use Modules\ClassSection\Events\ClassSectionUpdated;
+use Modules\ClassSection\Http\Requests\Backend\ClassSectionsRequest;
+use Modules\Customer\Http\Requests\Backend\CustomersRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Modules\Customer\Events\CustomerCreated;
+use Modules\Customer\Events\CustomerUpdated;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
+use Modules\Customer\Models\Customer;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
-class AttendencesController extends Controller
+class ClassSectionController extends Controller
 {
     use Authorizable;
-
     use Authorizable;
-
     public $module_title;
 
     public $module_name;
@@ -31,23 +34,26 @@ class AttendencesController extends Controller
 
     public $module_icon;
 
-    public $module_model;public function __construct()
+    public $module_model;
+    public function __construct()
     {
         // Page Title
-        $this->module_title = 'Attendences';
+        $this->module_title = 'ClassSections';
 
         // module name
-        $this->module_name = 'attendences';
+        $this->module_name = 'classsections';
 
         // directory path of the module
-        $this->module_path = 'attendence::backend';
+        $this->module_path = 'classsection::backend';
 
         // module icon
         $this->module_icon = 'fa-regular fa-sun';
 
         // module model name, path
-        $this->module_model = "Modules\Attendence\Models\Attendence";
+        $this->module_model = "Modules\ClassSection\Models\ClassSection";
     }
+
+
     public function index()
     {
         $module_title = $this->module_title;
@@ -65,12 +71,13 @@ class AttendencesController extends Controller
         //dd($module_path);
         return view(
             //I used Static Here which is $module_path
-            "attendence::backend.attendences.index_datatable",
+            "classsection::backend.customers.index_datatable",
             compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_name_singular', 'module_action')
         );
     }
 
 
+    
     public function index_data()
     {
         $module_title = $this->module_title;
@@ -82,36 +89,23 @@ class AttendencesController extends Controller
 
         $module_action = 'List';
 
-        $page_heading = label_case($module_title);
-        $title = $page_heading.' '.label_case($module_action);
-
-        $$module_name = $module_model::select('id', 'name', 'updated_at');
+        $$module_name = $module_model::select('id','referrer_mobile_number', 'name','referrer_pos_id','referee_mobile_number',
+        'referee_name','relationship_with_referrer', 'updated_at');
 
         $data = $$module_name;
 
         return Datatables::of($$module_name)
-                        ->addColumn('action', function ($data) {
-                            $module_name = $this->module_name;
-
-                            return view('backend.includes.action_column', compact('module_name', 'data'));
-                        })
-                        ->editColumn('name', '<strong>{{$name}}</strong>')
-                        ->editColumn('updated_at', function ($data) {
-                            $module_name = $this->module_name;
-
-                            $diff = Carbon::now()->diffInHours($data->updated_at);
-
-                            if ($diff < 25) {
-                                return $data->updated_at->diffForHumans();
-                            } else {
-                                return $data->updated_at->isoFormat('llll');
-                            }
-                        })
-                        ->rawColumns(['name', 'action'])
-                        ->orderColumns(['id'], '-:column $1')
-                        ->make(true);
+            ->addColumn('action', function ($data) {
+                $module_name = $this->module_name;
+                // dd($data);
+                return view('backend.includes.action_column', compact('module_name', 'data'));
+            }) 
+            ->rawColumns(['name', 'status', 'action'])
+            ->orderColumns(['id'], '-:column $1')
+            ->editColumn('referrer_mobile_number','{{ $referrer_mobile_number }}')
+            
+            ->make(true);
     }
-
 
     public function create()
     {
@@ -123,27 +117,15 @@ class AttendencesController extends Controller
         $module_name_singular = Str::singular($module_name);
 
         $module_action = 'Create';
-
+        // $point = "create";
 
         Log::info(label_case($module_title.' '.$module_action).' | User:'.Auth::user()->name.'(ID:'.Auth::user()->id.')');
 
         return view(
-            "attendence::backend.$module_name.create",
+            "classsection::backend.$module_name.create",
             compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular','module_path')
         );
-    }
-
-
-
-
-    
-     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(AttendencesRequest $request)
+    }    public function store(ClassSectionsRequest $request)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -151,16 +133,20 @@ class AttendencesController extends Controller
         $module_icon = $this->module_icon;
         $module_model = $this->module_model;
         $module_name_singular = Str::singular($module_name);
-
         $module_action = 'Store';
-        $data = $request->all();
+       // $data =generateReferrerPosId();
+     //   $data = $request->generateReferrerPosId();
+       // dd($data);
+        $data= $request->all();
+
+      //   dd($data);
   
  
         $$module_name_singular = $module_model::create($data);
 
 
  
-        event(new AttendenceCreated($$module_name_singular));
+        event(new ClassSectionCreated($$module_name_singular));
 
         Flash::success("<i class='fas fa-check'></i> New '".Str::singular($module_title)."' Added")->important();
 
@@ -168,6 +154,7 @@ class AttendencesController extends Controller
 
         return redirect("admin/$module_name");
     }
+
     public function show($id)
     {
        // $id =Crypt::encrypt($id);
@@ -192,33 +179,34 @@ class AttendencesController extends Controller
         Log::info(label_case($module_title.' '.$module_action).' | User:'.Auth::user()->name.'(ID:'.Auth::user()->id.')');
 
         return view(
-            "attendence::backend.$module_name.show",
-            compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "$module_name_singular", 'activities','module_path')
+            "classsection::backend.$module_name.show",
+            compact('module_title', 'module_name', 'module_icon', 'module_name_singular', 'module_action', "$module_name_singular", 'activities')
+        );
+    }
+    public function edit($id)
+    {
+        $module_title = $this->module_title;
+        $module_name = $this->module_name;
+        $module_path = $this->module_path;
+        $module_icon = $this->module_icon;
+        $module_model = $this->module_model;
+        $module_name_singular = Str::singular($module_name);
+        $module_action = 'Edit';
+
+        $$module_name_singular = $module_model::findOrFail($id); 
+
+        Log::info(label_case($module_title.' '.$module_action)." | '".$$module_name_singular->name.'(ID:'.$$module_name_singular->id.") ' by User:".Auth::user()->name.'(ID:'.Auth::user()->id.')');
+
+        return view(
+            "classsection::backend.$module_name.edit",
+            compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular','module_path', 'module_action', "$module_name_singular")
+  
         );
     }
 
-    public function edit($id)
-    {
-    $module_title = $this->module_title;
-    $module_name = $this->module_name;
-    $module_path = $this->module_path;
-    $module_icon = $this->module_icon;
-    $module_model = $this->module_model;
-    $module_name_singular = Str::singular($module_name);
 
-    $module_action = 'Edit';
-
-    $$module_name_singular = $module_model::findOrFail($id);
-
-    Log::info(label_case($module_title.' '.$module_action)." | '".$$module_name_singular->name.'(ID:'.$$module_name_singular->id.") ' by User:".Auth::user()->name.'(ID:'.Auth::user()->id.')');
-
-    return view(
-        "attendence::backend.$module_name.edit",
-        compact('module_title', 'module_name', 'module_icon', 'module_action', 'module_name_singular', 'module_action', "$module_name_singular",'module_path')
-    );
-}
-
-        public function update(AttendencesRequest $request, $id)
+    
+    public function update(ClassSectionsRequest $request, $id)
     {
         $module_title = $this->module_title;
         $module_name = $this->module_name;
@@ -242,7 +230,7 @@ class AttendencesController extends Controller
 
         
 
-        event(new AttendenceUpdated($$module_name_singular));
+        event(new ClassSectionUpdated($$module_name_singular));
 
         Flash::success("<i class='fas fa-check'></i> '".Str::singular($module_title)."' Updated Successfully")->important();
 
@@ -289,7 +277,7 @@ class AttendencesController extends Controller
         Log::info(label_case($module_title.' '.$module_action).' | User:'.Auth::user()->name);
 
         return view(
-            "attendence::backend.$module_name.trash",
+            "classsection::backend.$module_name.trash",
             compact('module_title', 'module_name', "$module_name", 'module_icon', 'module_name_singular', 'module_action')
         );
     }
@@ -316,6 +304,3 @@ class AttendencesController extends Controller
     }
 
 }
-
-
-

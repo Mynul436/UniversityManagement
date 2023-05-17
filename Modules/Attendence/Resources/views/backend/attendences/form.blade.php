@@ -11,7 +11,7 @@
     {{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
 </div>
 </div> --}}
-{{-- <div class="col-12 col-sm-4">
+<div class="col-12 col-sm-4">
         <div class="form-group">
             <?php
             $field_name = 'attendence_date';
@@ -20,9 +20,9 @@
             $required = "";
             ?>
             {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
-{{ html()->text($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+{{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
 </div>
-</div> --}}
+</div>
 
 
 <div class="col-12 col-sm-4">
