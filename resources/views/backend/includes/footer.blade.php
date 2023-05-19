@@ -5,5 +5,5 @@
         @lang('Copyright') &copy; {{ date('Y') }}
         @endif
     </div>
-    <div class="ms-auto">{!! setting('footer_text') !!}</div>
+    {{-- <div class="ms-auto">{!! setting('footer_text') !!}</div> --}}
 </footer>
