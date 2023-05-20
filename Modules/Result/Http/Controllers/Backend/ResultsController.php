@@ -94,7 +94,8 @@ class ResultsController extends Controller
         $page_heading = label_case($module_title);
         $title = $page_heading.' '.label_case($module_action);
 
-        $$module_name = $module_model::select('id', 'name', 'updated_at','reg_no','total_marks');
+        $$module_name = $module_model::select('id', 'name', 'updated_at',
+        'reg_no','total_marks','class_id','section_id','subject_id');
 
         $data = $$module_name;
 
@@ -118,6 +119,9 @@ class ResultsController extends Controller
                         })
                         ->editColumn('reg_no','{{ $reg_no }}')
                         ->editColumn('total_marks','{{ $total_marks }}')
+                        ->editColumn('class_id','{{ $class_id }}')
+                        ->editColumn('section_id','{{ $section_id }}')
+                        ->editColumn('subject_id','{{ $subject_id }}')
                         ->rawColumns(['name', 'action'])
                         ->orderColumns(['id'], '-:column $1')
                         ->make(true);
@@ -155,7 +159,7 @@ class ResultsController extends Controller
 
         $module_action = 'Store';
         $data = $request->all();
-  
+ // dd($data);
  
         $$module_name_singular = $module_model::create($data);
 

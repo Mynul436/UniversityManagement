@@ -57,6 +57,16 @@
                             <th>
                                 Registration Number
                             </th>
+                          
+                            <th>
+                                Class
+                            </th>
+                            <th>
+                                Section
+                            </th>
+                            <th>
+                                Subject
+                            </th>
                             <th>
                                 Total Marks
                             </th>
@@ -118,6 +128,18 @@
             {
                 data: 'reg_no',
                 name: 'reg_no'
+            },
+            {
+                data: 'class_id',
+                name: 'class_id'
+            },
+            {
+                data: 'section_id',
+                name: 'section_id'
+            },
+            {
+                data: 'subject_id',
+                name: 'subject_id'
             },
             {
                 data: 'total_marks',

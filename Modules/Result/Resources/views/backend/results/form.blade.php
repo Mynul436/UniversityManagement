@@ -27,12 +27,12 @@
     <div class="col-12 col-sm-4">
         <div class="form-group">
             <?php
-            $field_name = 'class_name';
+            $field_name = 'class_id';
             $field_lable = label_case($field_name);
             $field_placeholder = $field_lable;
             $required = "required";
             $classes=DB::table('standardorclasses')->get(['id','name']);
-// dd($classes);
+         //   dd($classes);
 
             ?>
                {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
