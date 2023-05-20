@@ -92,8 +92,8 @@
                                             $field_placeholder = "-- Select an option --";
                                             $required = "required";
                                             $select_options = [
-                                                '1'=>'Absent',
-                                                '0'=>'Present',
+                                                '1'=>'Present',
+                                                '0'=>'Absent',
                                                 '2'=>'Leave'
                                             ];
                                             ?>
