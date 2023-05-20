@@ -12,16 +12,16 @@
 </div>
 </div> --}}
 <div class="col-12 col-sm-4">
-        <div class="form-group">
-            <?php
+    <div class="form-group">
+        <?php
             $field_name = 'attendence_date';
             $field_lable = label_case($field_name);
             $field_placeholder = $field_lable;
             $required = "";
             ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
-{{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-</div>
+        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
+        {{ html()->date($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
+    </div>
 </div>
 
 
@@ -89,79 +89,6 @@
 </div>
 </div>
 
-<div class="card-body">
-    @php
-
-    use App\Models\User;
-    use Spatie\Permission\Models\Role;
-
-    $student = Role::findByName('student');
-    $student1 = $student->users;
-    $studentsByClass = $student1->groupBy('class');
-
-    @endphp
-    @foreach($studentsByClass as $class => $students)
-    <h3>{{ $class }}</h3>
-    <table id="example" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>SL</th>
-                <th>Name</th>
-                <th>Attendance Status</th>
-                <th>Comment</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($students as $student)
-            <tr>
-                <td>{{ $loop->iteration }}</td>
-                <td>{{ $student->name }}</td>
-                {{-- <td>
-                    <select name="attendance_status[]">
-                        <option value="present">Present</option>
-                        <option value="absent">Absent</option>
-                        <option value="leave">Leave</option>
-                    </select>
-                </td> --}}
-
-                <td>
-                    @php
-                    // dd($student->id)
-                    @endphp
-                    <div class="form-group">
-                        <?php
-    $field_name = 'status';
-    $field_lable = label_case($field_name);
-    $field_placeholder = "-- Select an option --";
-    $required = "required";
-    $select_options = [
-        '1'=>'Absent',
-        '0'=>'Present',
-        '2'=>'Leave'
-    ];
-    ?>
-                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
-                        {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }}
-                    </div>
-                </td>
-                <td>
-                    <div class="form-group">
-                        <?php
-                        $field_name = 'comment';
-                        $field_lable = label_case($field_name);
-                        $field_placeholder = $field_lable;
-                        $required = "";
-                        ?>
-                        {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
-                        {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-                    </div>
-                </td>
-            </tr>
-            @endforeach
-        </tbody>
-    </table>
-    @endforeach
-</div>
 
 {{--
     @php
@@ -200,17 +127,3 @@
 
 
 
-<div class="row mb-3">
-    <div class="col-12">
-        <div class="form-group">
-            <?php
-            $field_name = 'description';
-            $field_lable = label_case($field_name);
-            $field_placeholder = $field_lable;
-            $required = "";
-            ?>
-            {{ html()->label($field_lable, $field_name)->class('form-label') }} {!! fielf_required($required) !!}
-            {{ html()->textarea($field_name)->placeholder($field_placeholder)->class('form-control')->attributes(["$required"]) }}
-        </div>
-    </div>
-</div>

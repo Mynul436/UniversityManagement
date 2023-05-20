@@ -55,8 +55,23 @@
                                 @lang("attendence::text.name")
                             </th>
                             <th>
-                                @lang("attendence::text.updated_at")
+                                Attendance Date
                             </th>
+                            <th>
+                                Section Name
+                            </th>
+                            <th>
+                                Class Name
+                            </th>
+                            <th>
+                                Subject Name
+                            </th>
+                            <th>
+                                Status
+                            </th>
+                            {{-- <th>
+                                @lang("attendence::text.updated_at")
+                            </th> --}}
                             <th class="text-end">
                                 @lang("attendence::text.action")
                             </th>
@@ -110,9 +125,29 @@
                 name: 'name'
             },
             {
-                data: 'updated_at',
-                name: 'updated_at'
+                data: 'attendence_date',
+                name: 'attendence_date'
             },
+            {
+                data: 'section_name',
+                name: 'section_name'
+            },
+            {
+                data: 'class_name',
+                name: 'class_name'
+            },
+            {
+                data: 'subject_name',
+                name: 'subject_name'
+            },
+            {
+                data: 'status',
+                name: 'status'
+            },
+            // {
+            //     data: 'updated_at',
+            //     name: 'updated_at'
+            // },
             {
                 data: 'action',
                 name: 'action',

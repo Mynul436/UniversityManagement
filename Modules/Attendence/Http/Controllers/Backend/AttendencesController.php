@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Activitylog\Models\Activity;
 use Yajra\DataTables\DataTables;
 use Carbon\Carbon;
+use Illuminate\Support\Collection;
 
 class AttendencesController extends Controller
 {
@@ -31,7 +32,8 @@ class AttendencesController extends Controller
 
     public $module_icon;
 
-    public $module_model;public function __construct()
+    public $module_model;
+    public function __construct()
     {
         // Page Title
         $this->module_title = 'Attendences';
@@ -85,7 +87,8 @@ class AttendencesController extends Controller
         $page_heading = label_case($module_title);
         $title = $page_heading.' '.label_case($module_action);
 
-        $$module_name = $module_model::select('id', 'name', 'updated_at');
+        $$module_name = $module_model::select('id', 'name', 'updated_at','attendence_date',
+        'section_name','class_name','subject_name','description','status');
 
         $data = $$module_name;
 
@@ -96,6 +99,11 @@ class AttendencesController extends Controller
                             return view('backend.includes.action_column', compact('module_name', 'data'));
                         })
                         ->editColumn('name', '<strong>{{$name}}</strong>')
+                        ->editColumn('attendence_date','{{ $attendence_date }}')
+                        ->editColumn('section_name','{{ $section_name }}')
+                        ->editColumn('class_name','{{ $class_name }}')
+                        ->editColumn('subject_name','{{ $subject_name }}')
+                        ->editColumn('status','{{ $status }}')
                         ->editColumn('updated_at', function ($data) {
                             $module_name = $this->module_name;
 
@@ -142,9 +150,192 @@ class AttendencesController extends Controller
      *
      * @param  Request  $request
      * @return Response
-     */
-    public function store(AttendencesRequest $request)
-    {
+    //  */
+    // public function store(AttendencesRequest $request)
+    // {
+    //     $module_title = $this->module_title;
+    //     $module_name = $this->module_name;
+    //     $module_path = $this->module_path;
+    //     $module_icon = $this->module_icon;
+    //     $module_model = $this->module_model;
+    //     $module_name_singular = Str::singular($module_name);
+    
+    //     $module_action = 'Store';
+    //     $data = $request->except('_token');
+    
+    //     session()->get('section_date_classwise_attendence_req');
+    
+    //     $sessionData = session()->get('section_date_classwise_attendence_req');
+    //     $mergedData = array_merge($sessionData, $data);
+    
+    //     $fixedValues = [
+    //         'attendence_date' => $mergedData['attendence_date'],
+    //         'section_name' => $mergedData['section_name'],
+    //         'class_name' => $mergedData['class_name'],
+    //         'subject_name' => $mergedData['subject_name'],
+    //         'description' => $mergedData['description'],
+    //     ];
+    
+    //     $attributes = [];
+    //     foreach ($mergedData as $key => $value) {
+    //         if (is_array($value)) {
+    //             foreach ($value as $subKey => $subValue) {
+    //                 $attributes["$key.$subKey"] = $subValue;
+    //             }
+    //         } else {
+    //             $attributes[$key] = $value;
+    //         }
+    //     }
+    
+    //     $students = []; // Array to store student names
+    
+    //     foreach ($attributes as $studentId => $studentName) {
+    //         // Assign each student name to the 'name' field using student ID as key
+    //         $attributes["name.$studentId"] = $studentName;
+    
+    //         // Store student names in the $students array for logging purposes
+    //         $students[] = $studentName;
+    //     }
+    //    // dd($attributes);
+    
+    //     unset($attributes['name']); // Remove the original 'name' field from $attributes
+    
+    //     $mergedAttributes = array_merge($fixedValues, $attributes);
+    
+    //     $$module_name_singular = $module_model::create($mergedAttributes);
+    
+    //     event(new AttendenceCreated($$module_name_singular));
+    
+    //     $studentNames = implode(', ', $students); // Convert student names to a string for logging
+    
+    //     Flash::success("<i class='fas fa-check'></i> New '".Str::singular($module_title)."' Added")->important();
+    
+    //     Log::info(label_case($module_title.' '.$module_action)." | '".$studentNames.'(ID:'.$$module_name_singular->id.") ' by User:".Auth::user()->name.'(ID:'.Auth::user()->id.')');
+    
+    //     return redirect("admin/$module_name");
+    // }
+    
+//      public function store(AttendencesRequest $request)
+// {
+//     $module_title = $this->module_title;
+//     $module_name = $this->module_name;
+//     $module_path = $this->module_path;
+//     $module_icon = $this->module_icon;
+//     $module_model = $this->module_model;
+//     $module_name_singular = Str::singular($module_name);
+
+//     $module_action = 'Store';
+//     $data = $request->except('_token');
+
+//     session()->get('section_date_classwise_attendence_req');
+
+//     $sessionData = session()->get('section_date_classwise_attendence_req');
+//     $mergedData = array_merge($sessionData, $data);
+
+//     $attributes = [];
+//     foreach ($mergedData as $key => $value) {
+//         if (is_array($value)) {
+//             foreach ($value as $subKey => $subValue) {
+//                 $attributes["$key.$subKey"] = $subValue;
+//             }
+//         } else {
+//             $attributes[$key] = $value;
+//         }
+//     }
+//  //   dd($attributes);
+
+//     $$module_name_singular = $module_model::create($attributes);
+
+//     event(new AttendenceCreated($$module_name_singular));
+
+//     Flash::success("<i class='fas fa-check'></i> New '".Str::singular($module_title)."' Added")->important();
+
+//     Log::info(label_case($module_title.' '.$module_action)." | '".$$module_name_singular->name.'(ID:'.$$module_name_singular->id.") ' by User:".Auth::user()->name.'(ID:'.Auth::user()->id.')');
+
+//     return redirect("admin/$module_name");
+// }
+public function store(AttendencesRequest $request)
+{
+    $module_title = $this->module_title;
+    $module_name = $this->module_name;
+    $module_path = $this->module_path;
+    $module_icon = $this->module_icon;
+    $module_model = $this->module_model;
+    $module_name_singular = Str::singular($module_name);
+
+    $module_action = 'Store';
+
+    $data = $request->except('_token');
+    $sessionData = session()->get('section_date_classwise_attendence_req');
+    $mergedData = array_merge($sessionData, $data);
+
+    $mergedData = array_merge($sessionData, $data);
+    
+        $fixedValues = [
+            'attendence_date' => $mergedData['attendence_date'],
+            'section_name' => $mergedData['section_name'],
+            'class_name' => $mergedData['class_name'],
+            'subject_name' => $mergedData['subject_name'],
+            'description' => $mergedData['description'],
+        ];
+      //  dd($fixedValues);
+
+    // Extract the required fields and their corresponding values
+    $requiredFields = ['attendence_date', 'section_name', 'class_name', 'subject_name', 'description'];
+    $extractedData = array_intersect_key($mergedData, array_flip($requiredFields));
+// dd($extractedData);
+    // Extract the student data and restructure it
+    $students = [];
+    foreach ($mergedData['name'] as $studentId => $studentName) {
+        $students[] = [
+            'name' => $studentName,
+            'status' => $mergedData['status'][$studentId],
+            'comment' => $mergedData['comment'][$studentId],
+        ];
+    }
+
+    // Add the student data to the extracted data
+    $extractedData['students'] = $students;
+  //  dd($extractedData['students']);
+    $countArray=count($extractedData['students']);
+  //  dd($countArray);
+   $studentAttendanceInfo=[];
+   // dd($extractedData['students'][0]);
+    for($i=0;$i<$countArray;$i++){
+        $studentAttendanceInfo[$i]=$extractedData['students'][$i];
+        //dd($studentAttendanceInfo[$i]);
+        $mergedData = array_merge($fixedValues, $studentAttendanceInfo[$i]);
+     //   dd($mergedData);
+        $$module_name_singular = $module_model::create($mergedData);
+
+       
+    }
+    
+
+    // Create the record using the extracted data
+
+    event(new AttendenceCreated($$module_name_singular));
+
+    Flash::success("<i class='fas fa-check'></i> New '".Str::singular($module_title)."' Added")->important();
+
+    Log::info(label_case($module_title.' '.$module_action)." | '".$$module_name_singular->name.'(ID:'.$$module_name_singular->id.") ' by User:".Auth::user()->name.'(ID:'.Auth::user()->id.')');
+
+    return redirect("admin/$module_name");
+}
+
+   
+    public function section_date_classwise_attendence(AttendencesRequest $request){
+        // dd($request->all());
+        // dd('section_date_classwise_attendence');
+
+        session()->put('section_date_classwise_attendence_req', $request->all());
+        // dd(session()->get('section_date_classwise_attendence_req'));
+
+        $attendence_date = $request->attendence_date;
+        $section_name = $request->section_name;
+        $class_name= $request->class_name;
+        $subject_name= $request->subject_name;
+
         $module_title = $this->module_title;
         $module_name = $this->module_name;
         $module_path = $this->module_path;
@@ -152,21 +343,24 @@ class AttendencesController extends Controller
         $module_model = $this->module_model;
         $module_name_singular = Str::singular($module_name);
 
-        $module_action = 'Store';
-        $data = $request->all();
-  
- 
-        $$module_name_singular = $module_model::create($data);
+        $module_action = 'Create';
+        
 
 
- 
-        event(new AttendenceCreated($$module_name_singular));
+        // $$module_name = $module_model::role('student')
+        // ->where('section_name', $section_name)
+        // ->where('class_name', $class_name)
+        // ->select('name');
 
-        Flash::success("<i class='fas fa-check'></i> New '".Str::singular($module_title)."' Added")->important();
 
-        Log::info(label_case($module_title.' '.$module_action)." | '".$$module_name_singular->name.'(ID:'.$$module_name_singular->id.") ' by User:".Auth::user()->name.'(ID:'.Auth::user()->id.')');
+        Log::info(label_case($module_title.' '.$module_action).' | User:'.Auth::user()->name.'(ID:'.Auth::user()->id.')');
 
-        return redirect("admin/$module_name");
+        return view(
+            "attendence::backend.$module_name.section_date_classwise_attendence",
+            compact('module_title', 'module_name', 'module_icon','attendence_date', 
+            'section_name','class_name','subject_name',
+            'module_action', 'module_name_singular','module_path')
+        );
     }
     public function show($id)
     {

@@ -29,7 +29,7 @@ return new class extends Migration
             $table->string('section_name')->nullable();
             $table->integer('year')->nullable();
 
-    $table->string('reg_no')->nullable();
+            $table->string('reg_no')->nullable();
 
             $table->string('father_name')->nullable();
             $table->string('mother_name')->nullable();

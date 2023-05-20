@@ -39,7 +39,7 @@
             {{-- {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }} --}}
             <select name="{{$field_name}}" id="{{$field_name}}" class="form-control" required="required">
                 @foreach ($classes as $class)
-                    <option value="{{$class->id}}">{{$class->name}}</option>
+                    <option value="{{$class->name}}">{{$class->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -60,7 +60,7 @@
             {{-- {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }} --}}
             <select name="{{$field_name}}" id="{{$field_name}}" class="form-control" required="required">
                 @foreach ($classes as $class)
-                    <option value="{{$class->id}}">{{$class->name}}</option>
+                    <option value="{{$class->name}}">{{$class->name}}</option>
                 @endforeach
             </select>
         </div>
@@ -80,7 +80,7 @@
             {{-- {{ html()->select($field_name, $select_options)->placeholder($field_placeholder)->class('form-control select2')->attributes(["$required"]) }} --}}
             <select name="{{$field_name}}" id="{{$field_name}}" class="form-control" required="required">
                 @foreach ($classes as $class)
-                    <option value="{{$class->id}}">{{$class->name}}</option>
+                    <option value="{{$class->name}}">{{$class->name}}</option>
                 @endforeach
             </select>
         </div>

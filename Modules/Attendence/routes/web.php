@@ -56,6 +56,7 @@ Route::group(['namespace' => '\Modules\Attendence\Http\Controllers\Backend', 'as
      */
     $module_name = 'attendences';
     $controller_name = 'AttendencesController';
+    Route::match(['POST', 'GET','PUT'], "$module_name/section_date_classwise_attendence", ['as' => "$module_name.section_date_classwise_attendence", 'uses' => "$controller_name@section_date_classwise_attendence"]);
     Route::get("$module_name/index_list", ['as' => "$module_name.index_list", 'uses' => "$controller_name@index_list"]);
     Route::get("$module_name/index_data", ['as' => "$module_name.index_data", 'uses' => "$controller_name@index_data"]);
     Route::get("$module_name/trashed", ['as' => "$module_name.trashed", 'uses' => "$controller_name@trashed"]);

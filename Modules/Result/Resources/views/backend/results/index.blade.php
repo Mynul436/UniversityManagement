@@ -57,6 +57,10 @@
                             <th>
                                 @lang("result::text.slug")
                             </th>
+                            <th> 
+                                Registration Number
+                            </th>
+
                             <th>
                                 @lang("result::text.updated_at")
                             </th>
@@ -80,6 +84,9 @@
                             </td>
                             <td>
                                 {{ $module_name_singular->slug }}
+                            </td>
+                            <td>
+                                {{ $module_name_singular->reg_no }}
                             </td>
                             <td>
                                 {{ $module_name_singular->updated_at->diffForHumans() }}

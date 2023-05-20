@@ -55,6 +55,12 @@
                                 @lang("result::text.name")
                             </th>
                             <th>
+                                Registration Number
+                            </th>
+                            <th>
+                                Total Marks
+                            </th>
+                            <th>
                                 @lang("result::text.updated_at")
                             </th>
                             <th class="text-end">
@@ -109,6 +115,15 @@
                 data: 'name',
                 name: 'name'
             },
+            {
+                data: 'reg_no',
+                name: 'reg_no'
+            },
+            {
+                data: 'total_marks',
+                name: 'total_marks'
+            },
+
             {
                 data: 'updated_at',
                 name: 'updated_at'

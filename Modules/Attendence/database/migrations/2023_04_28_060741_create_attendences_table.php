@@ -24,10 +24,10 @@ return new class extends Migration
             // $table->string('attendence_status')->nullable();
             $table->string('comment')->nullable();
 
-            $table->string('name')->default('all ok');
+            $table->string('name')->nullable();
             $table->string('slug')->nullable();
             $table->text('description')->nullable();
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->nullable();
 
             $table->integer('created_by')->unsigned()->nullable();
             $table->integer('updated_by')->unsigned()->nullable();
